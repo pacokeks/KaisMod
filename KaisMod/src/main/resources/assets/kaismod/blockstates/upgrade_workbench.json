@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "kaismod:block/upgrade_workbench"
+    }
+  }
+}

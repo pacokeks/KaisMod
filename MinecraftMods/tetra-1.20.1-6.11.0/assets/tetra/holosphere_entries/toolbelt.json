@@ -1,0 +1,9 @@
+{
+    "item": "tetra:modular_toolbelt",
+    "icon": {
+        "textureLocation": "tetra:textures/gui/holo.png",
+        "textureX": 152,
+        "textureY": 218
+    },
+    "position": 0
+}

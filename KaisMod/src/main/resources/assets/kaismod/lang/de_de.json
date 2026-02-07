@@ -1,0 +1,11 @@
+{
+  "itemGroup.kaismod.main": "Kais Mod",
+  "block.kaismod.upgrade_workbench": "Upgrade-Werkbank",
+  "item.kaismod.core_placeholder": "Kern-Platzhalter",
+  "item.kaismod.modular_sword": "Modulares Schwert",
+  "item.kaismod.modular_axe": "Modulare Axt",
+  "item.kaismod.modular_pickaxe": "Modulare Spitzhacke",
+  "item.kaismod.modular_spear": "Modularer Speer",
+  "item.kaismod.modular_mace": "Modularer Streitkolben",
+  "screen.kaismod.upgrade_workbench": "Upgrade-Werkbank"
+}
