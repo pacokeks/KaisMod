@@ -1,0 +1,30 @@
+{
+	"schemaVersion": 1,
+	"id": "kaismod",
+	"version": "${version}",
+	"name": "Kais Mod",
+	"description": "Modulares Werkzeugsystem mit Upgrade-Werkbank fuer Fabric 1.21.11.",
+	"authors": [
+		"Kai"
+	],
+	"contact": {
+		"homepage": "https://docs.fabricmc.net/develop/"
+	},
+	"license": "MIT",
+	"icon": "assets/kaismod/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"de.kai.kaismod.KaisMod"
+		],
+		"client": [
+			"de.kai.kaismod.KaisModClient"
+		]
+	},
+	"depends": {
+		"fabricloader": ">=0.18.4",
+		"minecraft": "~1.21.11",
+		"java": ">=21",
+		"fabric-api": "*"
+	}
+}

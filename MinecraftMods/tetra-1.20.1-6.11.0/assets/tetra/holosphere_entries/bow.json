@@ -1,0 +1,9 @@
+{
+    "item": "tetra:modular_bow",
+    "icon": {
+        "textureLocation": "tetra:textures/gui/holo.png",
+        "textureX": 190,
+        "textureY": 218
+    },
+    "position": 4
+}

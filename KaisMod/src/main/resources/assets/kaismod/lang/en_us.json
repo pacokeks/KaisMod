@@ -1,0 +1,11 @@
+{
+  "itemGroup.kaismod.main": "Kais Mod",
+  "block.kaismod.upgrade_workbench": "Upgrade Workbench",
+  "item.kaismod.core_placeholder": "Core Placeholder",
+  "item.kaismod.modular_sword": "Modular Sword",
+  "item.kaismod.modular_axe": "Modular Axe",
+  "item.kaismod.modular_pickaxe": "Modular Pickaxe",
+  "item.kaismod.modular_spear": "Modular Spear",
+  "item.kaismod.modular_mace": "Modular Mace",
+  "screen.kaismod.upgrade_workbench": "Upgrade Workbench"
+}
