@@ -19,6 +19,18 @@ public final class UpgradeWorkbenchScreenHandler extends ScreenHandler {
 	private static final int CORE_SLOT = 1;
 	private static final int UPGRADE_SLOT = 2;
 	private static final int CONFIRM_SLOT = 3;
+	private static final int SLOT_SPACING = 17;
+	private static final int TOOL_SLOT_X = 46;
+	private static final int TOOL_SLOT_Y = 51;
+	private static final int CORE_SLOT_X = TOOL_SLOT_X + SLOT_SPACING;
+	private static final int CORE_SLOT_Y = TOOL_SLOT_Y;
+	private static final int UPGRADE_SLOT_X = CORE_SLOT_X + SLOT_SPACING;
+	private static final int UPGRADE_SLOT_Y = TOOL_SLOT_Y;
+	private static final int CONFIRM_SLOT_X = UPGRADE_SLOT_X + SLOT_SPACING;
+	private static final int CONFIRM_SLOT_Y = TOOL_SLOT_Y;
+	private static final int PLAYER_INV_X = 12;
+	private static final int PLAYER_INV_Y = 116;
+	private static final int HOTBAR_Y = 171;
 
 	private static final int INVENTORY_START = 4;
 	private static final int INVENTORY_END = 31;
@@ -26,6 +38,7 @@ public final class UpgradeWorkbenchScreenHandler extends ScreenHandler {
 	private static final int HOTBAR_END = 40;
 
 	private final Inventory inventory;
+	private boolean updatingResult;
 
 	public UpgradeWorkbenchScreenHandler(int syncId, PlayerInventory playerInventory) {
 		this(syncId, playerInventory, null);
@@ -45,28 +58,28 @@ public final class UpgradeWorkbenchScreenHandler extends ScreenHandler {
 		this.inventory = actualInventory;
 		this.inventory.onOpen(playerInventory.player);
 
-		addSlot(new Slot(this.inventory, TOOL_SLOT, 26, 20) {
+		addSlot(new Slot(this.inventory, TOOL_SLOT, TOOL_SLOT_X, TOOL_SLOT_Y) {
 			@Override
 			public boolean canInsert(ItemStack stack) {
 				return stack.getItem() instanceof ModularToolItem;
 			}
 		});
 
-		addSlot(new Slot(this.inventory, CORE_SLOT, 62, 20) {
+		addSlot(new Slot(this.inventory, CORE_SLOT, CORE_SLOT_X, CORE_SLOT_Y) {
 			@Override
 			public boolean canInsert(ItemStack stack) {
 				return stack.isOf(ModItems.CORE_PLACEHOLDER);
 			}
 		});
 
-		addSlot(new Slot(this.inventory, UPGRADE_SLOT, 98, 20) {
+		addSlot(new Slot(this.inventory, UPGRADE_SLOT, UPGRADE_SLOT_X, UPGRADE_SLOT_Y) {
 			@Override
 			public boolean canInsert(ItemStack stack) {
 				return isUpgradeMaterial(stack);
 			}
 		});
 
-		addSlot(new Slot(this.inventory, CONFIRM_SLOT, 134, 20) {
+		addSlot(new Slot(this.inventory, CONFIRM_SLOT, CONFIRM_SLOT_X, CONFIRM_SLOT_Y) {
 			@Override
 			public boolean canInsert(ItemStack stack) {
 				return false;
@@ -87,12 +100,12 @@ public final class UpgradeWorkbenchScreenHandler extends ScreenHandler {
 
 		for (int row = 0; row < 3; row++) {
 			for (int col = 0; col < 9; col++) {
-				addSlot(new Slot(playerInventory, col + row * 9 + 9, 8 + col * 18, 58 + row * 18));
+				addSlot(new Slot(playerInventory, col + row * 9 + 9, PLAYER_INV_X + col * SLOT_SPACING, PLAYER_INV_Y + row * SLOT_SPACING));
 			}
 		}
 
 		for (int col = 0; col < 9; col++) {
-			addSlot(new Slot(playerInventory, col, 8 + col * 18, 116));
+			addSlot(new Slot(playerInventory, col, PLAYER_INV_X + col * SLOT_SPACING, HOTBAR_Y));
 		}
 
 		updateResult();
@@ -100,6 +113,9 @@ public final class UpgradeWorkbenchScreenHandler extends ScreenHandler {
 
 	@Override
 	public void onContentChanged(Inventory inventory) {
+		if (updatingResult) {
+			return;
+		}
 		super.onContentChanged(inventory);
 		updateResult();
 	}
@@ -171,6 +187,10 @@ public final class UpgradeWorkbenchScreenHandler extends ScreenHandler {
 	}
 
 	private void updateResult() {
+		if (updatingResult) {
+			return;
+		}
+
 		ItemStack toolStack = inventory.getStack(TOOL_SLOT);
 		ItemStack coreStack = inventory.getStack(CORE_SLOT);
 		ItemStack upgradeStack = inventory.getStack(UPGRADE_SLOT);
@@ -212,8 +232,16 @@ public final class UpgradeWorkbenchScreenHandler extends ScreenHandler {
 			}
 		}
 
-		inventory.setStack(CONFIRM_SLOT, preview);
-		sendContentUpdates();
+		updatingResult = true;
+		try {
+			ItemStack currentResult = inventory.getStack(CONFIRM_SLOT);
+			if (!ItemStack.areEqual(currentResult, preview)) {
+				inventory.setStack(CONFIRM_SLOT, preview);
+			}
+			sendContentUpdates();
+		} finally {
+			updatingResult = false;
+		}
 	}
 
 	private void consumeInputForResult() {

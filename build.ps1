@@ -2,7 +2,11 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 $progressActivity = "KaisMod Build"
 $copyBuildToMinecraftMods = $true
-$minecraftModsDir = "C:\Users\pasca\AppData\Roaming\.minecraft\mods"
+$appDataDir = [Environment]::GetFolderPath("ApplicationData")
+if ([string]::IsNullOrWhiteSpace($appDataDir)) {
+    throw "Konnte den aktuellen AppData-Pfad nicht ermitteln."
+}
+$minecraftModsDir = Join-Path (Join-Path $appDataDir ".minecraft") "mods"
 
 function Update-BuildProgress {
     param(

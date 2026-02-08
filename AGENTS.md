@@ -7,6 +7,7 @@
 - Bei Konflikt zwischen Quellen gilt: offizielle Fabric-Dokumentation vor Drittquellen.
 - Dieses Projekt ist ein Mod fuer **Fabric** fuer **Minecraft 1.21.11**.
 - Fuer Builds immer `C:\Users\pasca\Desktop\Kai\MinecraftMod\build.ps1` verwenden.
+- Der Agent darf Minecraft (Launcher/Client/`runClient`) **niemals selbst starten**; Ingame-Tests und Screenshots werden ausschliesslich vom Nutzer ausgefuehrt.
 - Wenn Informationen benoetigt werden, nutze immer auch diese lokalen Dateien:
   - `C:\Users\pasca\Desktop\Kai\MinecraftMod\documentation.md`
   - `C:\Users\pasca\Desktop\Kai\MinecraftMod\konzept.md`
