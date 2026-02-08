@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "PPP",
+    "WCW",
+    "III"
+  ],
+  "key": {
+    "P": "minecraft:oak_planks",
+    "W": "minecraft:crafting_table",
+    "C": "minecraft:smithing_table",
+    "I": "minecraft:iron_ingot"
+  },
+  "result": {
+    "id": "tetra:upgrade_workbench",
+    "count": 1
+  }
+}

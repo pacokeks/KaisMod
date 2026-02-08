@@ -1,0 +1,34 @@
+[
+    {
+        "key": "quality",
+        "level": 1,
+        "attributes": {
+            "**generic.attack_damage": 0.05,
+            "**tetra:draw_damage": 0.05,
+            "**tetra:ability_damage": 0.05
+        },
+        "tools": {
+            "axe_dig": [ 0, 3 ],
+            "shovel_dig": [ 0, 3 ],
+            "pickaxe_dig": [ 0, 3 ],
+            "hoe_dig": [ 0, 3 ],
+            "cut": [ 0, 3 ]
+        }
+    },
+    {
+        "key": "quality",
+        "level": 2,
+        "attributes": {
+            "**generic.attack_damage": 0.1,
+            "**tetra:draw_damage": 0.1,
+            "**tetra:ability_damage": 0.1
+        },
+        "tools": {
+            "axe_dig": [ 0, 6 ],
+            "shovel_dig": [ 0, 6 ],
+            "pickaxe_dig": [ 0, 6 ],
+            "hoe_dig": [ 0, 6 ],
+            "cut": [ 0, 6 ]
+        }
+    }
+]

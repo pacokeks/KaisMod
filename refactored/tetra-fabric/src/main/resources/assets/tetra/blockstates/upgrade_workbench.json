@@ -1,0 +1,11 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "tetra:block/upgrade_workbench"
+    },
+    "axis=z": {
+      "model": "tetra:block/upgrade_workbench",
+      "y": 90
+    }
+  }
+}

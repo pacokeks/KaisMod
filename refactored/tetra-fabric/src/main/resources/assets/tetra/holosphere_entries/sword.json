@@ -1,0 +1,9 @@
+{
+    "item": "tetra:modular_sword",
+    "icon": {
+        "textureLocation": "tetra:textures/gui/holo.png",
+        "textureX": 0,
+        "textureY": 218
+    },
+    "position": 1
+}

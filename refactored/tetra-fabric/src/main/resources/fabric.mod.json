@@ -1,0 +1,30 @@
+{
+	"schemaVersion": 1,
+	"id": "tetra",
+	"version": "${version}",
+	"name": "Tetra Refactored",
+	"description": "Fabric-Refactor fuer Minecraft 1.21.11 auf Basis der Tetra-Referenzstruktur.",
+	"authors": [
+		"Kai"
+	],
+	"contact": {
+		"homepage": "https://docs.fabricmc.net/develop/"
+	},
+	"license": "MIT",
+	"icon": "assets/tetra/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"se.mickelus.tetra.TetraFabricMod"
+		],
+		"client": [
+			"se.mickelus.tetra.TetraFabricModClient"
+		]
+	},
+	"depends": {
+		"fabricloader": ">=0.18.4",
+		"minecraft": "~1.21.11",
+		"java": ">=21",
+		"fabric-api": "*"
+	}
+}

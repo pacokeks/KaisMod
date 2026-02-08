@@ -1,0 +1,72 @@
+[
+    {
+        "key": "destabilized/heroic",
+        "group": "imprint",
+        "level": 1,
+        "aspects": {
+            "destabilized": 1
+        },
+        "effects": {
+            "heroic": [ 15, 2 ]
+        },
+        "glyph": {
+            "tint": "ee5599"
+        }
+    },
+    {
+        "key": "destabilized/heroic",
+        "group": "imprint",
+        "level": 2,
+        "aspects": {
+            "destabilized": 2
+        },
+        "effects": {
+            "heroic": [ 30, 4 ]
+        },
+        "glyph": {
+            "tint": "ee5599"
+        }
+    },
+    {
+        "key": "destabilized/heroic",
+        "group": "imprint",
+        "level": 3,
+        "aspects": {
+            "destabilized": 3
+        },
+        "effects": {
+            "heroic": [ 45, 6 ]
+        },
+        "glyph": {
+            "tint": "ee5599"
+        }
+    },
+    {
+        "key": "destabilized/heroic",
+        "group": "imprint",
+        "level": 4,
+        "aspects": {
+            "destabilized": 4
+        },
+        "effects": {
+            "heroic": [ 60, 8 ]
+        },
+        "glyph": {
+            "tint": "ee5599"
+        }
+    },
+    {
+        "key": "destabilized/heroic",
+        "group": "imprint",
+        "level": 5,
+        "aspects": {
+            "destabilized": 5
+        },
+        "effects": {
+            "heroic": [ 75, 10 ]
+        },
+        "glyph": {
+            "tint": "ee5599"
+        }
+    }
+]

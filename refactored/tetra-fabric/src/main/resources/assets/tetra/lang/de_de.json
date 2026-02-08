@@ -1,0 +1,11 @@
+{
+  "itemGroup.tetra.main": "Tetra Refactored",
+  "block.tetra.upgrade_workbench": "Upgrade-Werkbank",
+  "item.tetra.core_placeholder": "Kern-Platzhalter",
+  "item.tetra.modular_sword": "Modulares Schwert",
+  "item.tetra.modular_axe": "Modulare Axt",
+  "item.tetra.modular_pickaxe": "Modulare Spitzhacke",
+  "item.tetra.modular_spear": "Modularer Speer",
+  "item.tetra.modular_mace": "Modularer Streitkolben",
+  "screen.tetra.upgrade_workbench": "Upgrade-Werkbank"
+}

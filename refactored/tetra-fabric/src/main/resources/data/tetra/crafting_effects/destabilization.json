@@ -1,0 +1,21 @@
+{
+    "replace": true,
+    "outcomes": [
+        {
+            "type": "tetra:per_slot",
+            "minor": false,
+            "outcome": {
+                "type": "tetra:destabilize",
+                "outcomes": [
+                    {
+                        "type": "tetra:apply_list",
+                        "count": 1,
+                        "random": true,
+                        "references": [ "tetra:destabilization/" ]
+                    }
+                ]
+            }
+        }
+    ]
+}
+
