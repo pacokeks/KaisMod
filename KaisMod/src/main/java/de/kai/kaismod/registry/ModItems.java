@@ -17,6 +17,10 @@ import java.util.function.Function;
 
 public final class ModItems {
 	public static final Item CORE_PLACEHOLDER = register("core_placeholder", Item::new);
+	public static final Item EFFICIENCY_CORE = register("efficiency_core", Item::new);
+	public static final Item BLOOD_CORE = register("blood_core", Item::new);
+	public static final Item BREAKER_CORE = register("breaker_core", Item::new);
+	public static final Item PRECISION_CORE = register("precision_core", Item::new);
 	public static final Item MODULAR_SWORD = register("modular_sword", ModularSwordItem::new);
 	public static final Item MODULAR_AXE = register("modular_axe", ModularAxeItem::new);
 	public static final Item MODULAR_PICKAXE = register("modular_pickaxe", ModularPickaxeItem::new);

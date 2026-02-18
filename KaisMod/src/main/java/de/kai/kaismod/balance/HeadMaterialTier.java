@@ -38,7 +38,7 @@ public enum HeadMaterialTier {
 	}
 
 	public boolean canUpgradeTo(HeadMaterialTier nextTier) {
-		return next().map(nextTier::equals).orElse(false);
+		return nextTier.ordinal() > ordinal();
 	}
 
 	public static Optional<HeadMaterialTier> fromId(String id) {

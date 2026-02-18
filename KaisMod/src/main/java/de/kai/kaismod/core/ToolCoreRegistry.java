@@ -20,35 +20,35 @@ public final class ToolCoreRegistry {
 		EnumSet.allOf(ToolType.class),
 		"core.kaismod.core_placeholder.tooltip",
 		1,
-		2
+		16
 	));
 	public static final ToolCore EFFICIENCY_CORE = register(new BasicToolCore(
 		"kaismod:efficiency_core",
 		Set.of(ToolType.PICKAXE),
 		"core.kaismod.efficiency_core.tooltip",
-		2,
-		4
+		1,
+		16
 	));
 	public static final ToolCore BLOOD_CORE = register(new BasicToolCore(
 		"kaismod:blood_core",
-		Set.of(ToolType.SWORD),
+		Set.of(ToolType.SWORD, ToolType.AXE),
 		"core.kaismod.blood_core.tooltip",
-		2,
-		4
+		1,
+		16
 	));
 	public static final ToolCore BREAKER_CORE = register(new BasicToolCore(
 		"kaismod:breaker_core",
 		Set.of(ToolType.AXE, ToolType.MACE),
 		"core.kaismod.breaker_core.tooltip",
-		2,
-		4
+		1,
+		16
 	));
 	public static final ToolCore PRECISION_CORE = register(new BasicToolCore(
 		"kaismod:precision_core",
 		Set.of(ToolType.SPEAR),
 		"core.kaismod.precision_core.tooltip",
-		2,
-		4
+		1,
+		16
 	));
 
 	private ToolCoreRegistry() {

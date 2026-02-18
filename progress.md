@@ -198,3 +198,72 @@
 ### Build-Status
 - `C:\Users\pasca\Desktop\Kai\MinecraftMod\build.ps1` erneut erfolgreich.
 - JAR in `.minecraft\\mods` aktualisiert.
+
+## 2026-02-18 - Phase 4 Abschluss + Phase 5 Start
+
+### Phase-Status
+- **Phase 4**: abgeschlossen.
+- **Phase 5**: gestartet (Kostenmodell fuer Kopf-Upgrades aufgesetzt).
+
+### Umgesetzt (Phase 4)
+- Reale Core-Items registriert:
+  - `efficiency_core`, `blood_core`, `breaker_core`, `precision_core`
+- `UpgradeWorkbenchScreenHandler` erweitert:
+  - Core-Slot akzeptiert jetzt alle registrierten Core-Items.
+  - Core-Install bleibt einmalig.
+  - Core-Wechsel ist nur mit **Extra-Kosten** und Confirm moeglich.
+  - Switch-Katalysator: `amethyst_shard` im Upgrade-Slot.
+  - Core-Kompatibilitaet und Wechselregeln werden serverseitig erzwungen.
+- Kostenanbindung aus `ToolCoreRegistry` genutzt:
+  - Installation: `installationCost`
+  - Wechsel: `switchCost`
+
+### Umgesetzt (Phase 5 Start)
+- Datengetriebene Kopf-Upgrade-Kosten eingefuehrt:
+  - Datei: `data/kaismod/balance/head_upgrade_costs.json`
+  - Loader mit Code-Fallback: `HeadUpgradeRules`
+- `UpgradeWorkbenchScreenHandler` verbraucht fuer Kopf-Upgrades jetzt materialabhaengige Kosten (statt fix 1).
+
+### Build-Status
+- Build mit `C:\Users\pasca\Desktop\Kai\MinecraftMod\build.ps1` erfolgreich.
+
+## 2026-02-18 - Phase 5 Fortschritt (Tool-Eingang + Tooltip + Kernwechsel-Feinschliff)
+
+### Umgesetzt
+- `blood_core` ist jetzt zusaetzlich mit Axt kompatibel (fuer Core-Switch-Testfaelle).
+- Upgrade-Werkbank akzeptiert jetzt auch Vanilla-Basis-Tools als Eingang und wandelt sie in modulare Tools um:
+  - Pickaxe, Sword, Axe (alle Materialstufen)
+  - Trident als Speer-Basis
+- Dynamische Tooltip-Erweiterung fuer modulare Tools:
+  - Attack Damage
+  - Attack Speed
+  - aktiver Core
+  - Kopfmaterial
+  - Griffmaterial
+- Kopf-Upgrade-Pfad stabilisiert und Kosten-Logik bleibt datengetrieben aktiv.
+
+### Build-Status
+- Build mit `C:\Users\pasca\Desktop\Kai\MinecraftMod\build.ps1` erneut erfolgreich.
+
+## 2026-02-18 - Phase 5 Fortschritt (Stat-Recalculation Hook)
+
+### Umgesetzt
+- Zentrale Stat-Berechnung als eigener Baustein:
+  - `de.kai.kaismod.balance.ToolStatCalculator`
+- `ModularToolItem` nutzt die berechneten Werte jetzt nicht nur fuer Tooltip, sondern auch fuer Verhalten:
+  - zusaetzlicher kampfseitiger Schaden in `postHit` (serverseitig)
+  - material-/toolabhaengiger Haltbarkeitsverbrauch in `postHit` und `postMine`
+- Tooltip bleibt mit denselben Live-Werten synchron (Damage/Speed/Core/Kopf/Griff).
+
+### Build-Status
+- Build mit `C:\Users\pasca\Desktop\Kai\MinecraftMod\build.ps1` erfolgreich.
+
+## 2026-02-18 - Phase 5 Feintuning (Damage + Mining Speed)
+
+### Umgesetzt
+- Kampfwerte fuer Nicht-Pickaxe-Tools erhoeht (SWORD/AXE/SPEAR/MACE), Pickaxe-Damage bewusst unveraendert gehalten.
+- Mining-Speed-Hook auf die korrekte 1.21.11-Methode umgestellt (`getMiningSpeed` statt alter Methode).
+- Pickaxe-Mining-Speed deutlich angehoben, Axe-Mining-Speed fuer Stein-Abbau relativ abgesenkt, damit Pickaxe klar schneller bei Gestein ist.
+
+### Build-Status
+- Build mit `C:\Users\pasca\Desktop\Kai\MinecraftMod\build.ps1` erfolgreich.

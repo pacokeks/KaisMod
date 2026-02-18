@@ -2,10 +2,19 @@
   "itemGroup.kaismod.main": "Kais Mod",
   "block.kaismod.upgrade_workbench": "Upgrade-Werkbank",
   "item.kaismod.core_placeholder": "Kern-Platzhalter",
+  "item.kaismod.efficiency_core": "Effizienz-Kern",
+  "item.kaismod.blood_core": "Blut-Kern",
+  "item.kaismod.breaker_core": "Brecher-Kern",
+  "item.kaismod.precision_core": "Praezisions-Kern",
   "item.kaismod.modular_sword": "Modulares Schwert",
   "item.kaismod.modular_axe": "Modulare Axt",
   "item.kaismod.modular_pickaxe": "Modulare Spitzhacke",
   "item.kaismod.modular_spear": "Modularer Speer",
   "item.kaismod.modular_mace": "Modularer Streitkolben",
-  "screen.kaismod.upgrade_workbench": "Upgrade-Werkbank"
+  "screen.kaismod.upgrade_workbench": "Upgrade-Werkbank",
+  "core.kaismod.core_placeholder.tooltip": "Basis-Kern fuer erste Tests.",
+  "core.kaismod.efficiency_core.tooltip": "Fokus auf Abbauleistung (Spitzhacke).",
+  "core.kaismod.blood_core.tooltip": "Fokus auf Risiko/Offensivstil (Schwert).",
+  "core.kaismod.breaker_core.tooltip": "Fokus auf Durchbruch und Wucht (Axt/Streitkolben).",
+  "core.kaismod.precision_core.tooltip": "Fokus auf Reichweite und Praezision (Speer)."
 }

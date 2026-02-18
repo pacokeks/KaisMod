@@ -25,6 +25,19 @@ public final class UpgradeWorkbenchScreen extends HandledScreen<UpgradeWorkbench
 	private static final int PLAYER_INVENTORY_Y = 153;
 	private static final int PLAYER_INVENTORY_WIDTH = 179;
 	private static final int PLAYER_INVENTORY_HEIGHT = 106;
+	private static final int SLOT_SIZE = 18;
+	private static final int TOOL_SLOT_X = 152;
+	private static final int TOOL_SLOT_Y = 58;
+	private static final int CORE_SLOT_X = 161;
+	private static final int CORE_SLOT_Y = 108;
+	private static final int UPGRADE_SLOT_X = CORE_SLOT_X + 42;
+	private static final int UPGRADE_SLOT_Y = CORE_SLOT_Y;
+	private static final int CONFIRM_SLOT_X = UPGRADE_SLOT_X + 42;
+	private static final int CONFIRM_SLOT_Y = CORE_SLOT_Y;
+	private static final int DECOR_SIZE = 36;
+	private static final int DECOR_PADDING = (DECOR_SIZE - SLOT_SIZE) / 2;
+	private static final int DECOR_U = (TOOL_SLOT_X - WORKBENCH_X) - DECOR_PADDING;
+	private static final int DECOR_V = (TOOL_SLOT_Y - WORKBENCH_Y) - DECOR_PADDING;
 
 	public UpgradeWorkbenchScreen(UpgradeWorkbenchScreenHandler handler, PlayerInventory inventory, Text title) {
 		super(handler, inventory, title);
@@ -62,6 +75,8 @@ public final class UpgradeWorkbenchScreen extends HandledScreen<UpgradeWorkbench
 			TEXTURE_SIZE,
 			TEXTURE_SIZE
 		);
+
+		drawCustomSlots(context, x, y);
 	}
 
 	@Override
@@ -69,5 +84,28 @@ public final class UpgradeWorkbenchScreen extends HandledScreen<UpgradeWorkbench
 		renderBackground(context, mouseX, mouseY, delta);
 		super.render(context, mouseX, mouseY, delta);
 		drawMouseoverTooltip(context, mouseX, mouseY);
+	}
+
+	private void drawCustomSlots(DrawContext context, int x, int y) {
+		drawSlotSurrounding(context, x + CORE_SLOT_X, y + CORE_SLOT_Y);
+		drawSlotSurrounding(context, x + UPGRADE_SLOT_X, y + UPGRADE_SLOT_Y);
+		drawSlotSurrounding(context, x + CONFIRM_SLOT_X, y + CONFIRM_SLOT_Y);
+	}
+
+	private void drawSlotSurrounding(DrawContext context, int left, int top) {
+		int outerLeft = left - DECOR_PADDING;
+		int outerTop = top - DECOR_PADDING;
+		context.drawTexture(
+			RenderPipelines.GUI_TEXTURED,
+			WORKBENCH_TEXTURE,
+			outerLeft,
+			outerTop,
+			DECOR_U,
+			DECOR_V,
+			DECOR_SIZE,
+			DECOR_SIZE,
+			TEXTURE_SIZE,
+			TEXTURE_SIZE
+		);
 	}
 }
