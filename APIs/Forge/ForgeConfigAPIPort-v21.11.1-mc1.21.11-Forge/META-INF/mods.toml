@@ -1,0 +1,32 @@
+modLoader = "javafml"
+loaderVersion = "*"
+license = "MPL-2.0"
+issueTrackerURL = "https://github.com/Fuzss/forgeconfigapiport/issues"
+
+[[mods]]
+    modId = "forgeconfigapiport"
+    version = "21.11.1"
+    displayName = "Forge Config API Port"
+    description = "Provides NeoForge's & Forge's config systems to other modding ecosystems. Designed for a multi-loader architecture."
+    logoFile = "mod_logo.png"
+    updateJSONURL = "https://api.modrinth.com/updates/ohNO6lps/forge_updates.json?neoforge=only"
+    authors = "Fuzs"
+    displayURL = "https://modrinth.com/mod/forge-config-api-port"
+
+[[mixins]]
+    config = "forgeconfigapiport.common.mixins.json"
+
+[[mixins]]
+    config = "forgeconfigapiport.forge.mixins.json"
+
+[[dependencies.forgeconfigapiport]]
+    modId = "minecraft"
+    mandatory = true
+    type = "REQUIRED"
+    versionRange = "[1.21.11,1.21.12)"
+
+[[dependencies.forgeconfigapiport]]
+    modId = "forge"
+    mandatory = true
+    type = "REQUIRED"
+    versionRange = "[61.0.0,)"

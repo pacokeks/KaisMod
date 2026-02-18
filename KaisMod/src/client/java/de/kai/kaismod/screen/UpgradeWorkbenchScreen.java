@@ -9,18 +9,20 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 public final class UpgradeWorkbenchScreen extends HandledScreen<UpgradeWorkbenchScreenHandler> {
-	private static final Identifier FORGED_CONTAINER_TEXTURE = Identifier.of(KaisMod.MOD_ID, "textures/gui/forged-container.png");
+	private static final Identifier WORKBENCH_TEXTURE = Identifier.of(KaisMod.MOD_ID, "textures/gui/workbench.png");
 	private static final Identifier PLAYER_INVENTORY_TEXTURE = Identifier.of(KaisMod.MOD_ID, "textures/gui/player-inventory.png");
 
-	private static final int BACKGROUND_WIDTH = 179;
-	private static final int BACKGROUND_HEIGHT = 176;
+	private static final int BACKGROUND_WIDTH = 320;
+	private static final int BACKGROUND_HEIGHT = 240;
 	private static final int TEXTURE_SIZE = 256;
-	private static final int FORGED_CONTAINER_X = 0;
-	private static final int FORGED_CONTAINER_Y = -13;
-	private static final int FORGED_CONTAINER_WIDTH = 179;
-	private static final int FORGED_CONTAINER_HEIGHT = 128;
-	private static final int PLAYER_INVENTORY_X = 0;
-	private static final int PLAYER_INVENTORY_Y = 103;
+	private static final int WORKBENCH_X = 136;
+	private static final int WORKBENCH_Y = 42;
+	private static final int WORKBENCH_U = 0;
+	private static final int WORKBENCH_V = 0;
+	private static final int WORKBENCH_WIDTH = 48;
+	private static final int WORKBENCH_HEIGHT = 48;
+	private static final int PLAYER_INVENTORY_X = 72;
+	private static final int PLAYER_INVENTORY_Y = 153;
 	private static final int PLAYER_INVENTORY_WIDTH = 179;
 	private static final int PLAYER_INVENTORY_HEIGHT = 106;
 
@@ -38,13 +40,13 @@ public final class UpgradeWorkbenchScreen extends HandledScreen<UpgradeWorkbench
 		int y = this.y;
 		context.drawTexture(
 			RenderPipelines.GUI_TEXTURED,
-			FORGED_CONTAINER_TEXTURE,
-			x + FORGED_CONTAINER_X,
-			y + FORGED_CONTAINER_Y,
-			0.0F,
-			0.0F,
-			FORGED_CONTAINER_WIDTH,
-			FORGED_CONTAINER_HEIGHT,
+			WORKBENCH_TEXTURE,
+			x + WORKBENCH_X,
+			y + WORKBENCH_Y,
+			WORKBENCH_U,
+			WORKBENCH_V,
+			WORKBENCH_WIDTH,
+			WORKBENCH_HEIGHT,
 			TEXTURE_SIZE,
 			TEXTURE_SIZE
 		);

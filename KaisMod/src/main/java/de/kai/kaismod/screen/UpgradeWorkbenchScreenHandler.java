@@ -1,7 +1,10 @@
 package de.kai.kaismod.screen;
 
 import de.kai.kaismod.data.ToolState;
+import de.kai.kaismod.data.ToolStateOperationResult;
+import de.kai.kaismod.data.ToolStateOperations;
 import de.kai.kaismod.item.ModularToolItem;
+import de.kai.kaismod.core.ToolCoreRegistry;
 import de.kai.kaismod.registry.ModItems;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -12,25 +15,23 @@ import net.minecraft.item.Items;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
 
-import java.util.Optional;
-
 public final class UpgradeWorkbenchScreenHandler extends ScreenHandler {
 	private static final int TOOL_SLOT = 0;
 	private static final int CORE_SLOT = 1;
 	private static final int UPGRADE_SLOT = 2;
 	private static final int CONFIRM_SLOT = 3;
 	private static final int SLOT_SPACING = 17;
-	private static final int TOOL_SLOT_X = 46;
-	private static final int TOOL_SLOT_Y = 51;
-	private static final int CORE_SLOT_X = TOOL_SLOT_X + SLOT_SPACING;
-	private static final int CORE_SLOT_Y = TOOL_SLOT_Y;
-	private static final int UPGRADE_SLOT_X = CORE_SLOT_X + SLOT_SPACING;
-	private static final int UPGRADE_SLOT_Y = TOOL_SLOT_Y;
-	private static final int CONFIRM_SLOT_X = UPGRADE_SLOT_X + SLOT_SPACING;
-	private static final int CONFIRM_SLOT_Y = TOOL_SLOT_Y;
-	private static final int PLAYER_INV_X = 12;
-	private static final int PLAYER_INV_Y = 116;
-	private static final int HOTBAR_Y = 171;
+	private static final int TOOL_SLOT_X = 152;
+	private static final int TOOL_SLOT_Y = 58;
+	private static final int CORE_SLOT_X = 167;
+	private static final int CORE_SLOT_Y = 108;
+	private static final int UPGRADE_SLOT_X = CORE_SLOT_X + 28;
+	private static final int UPGRADE_SLOT_Y = CORE_SLOT_Y;
+	private static final int CONFIRM_SLOT_X = UPGRADE_SLOT_X + 28;
+	private static final int CONFIRM_SLOT_Y = CORE_SLOT_Y;
+	private static final int PLAYER_INV_X = 84;
+	private static final int PLAYER_INV_Y = 166;
+	private static final int HOTBAR_Y = 221;
 
 	private static final int INVENTORY_START = 4;
 	private static final int INVENTORY_END = 31;
@@ -38,6 +39,10 @@ public final class UpgradeWorkbenchScreenHandler extends ScreenHandler {
 	private static final int HOTBAR_END = 40;
 
 	private final Inventory inventory;
+	private Slot coreSlot;
+	private Slot upgradeSlot;
+	private Slot confirmSlot;
+	private int visibleMaterialSlots;
 	private boolean updatingResult;
 
 	public UpgradeWorkbenchScreenHandler(int syncId, PlayerInventory playerInventory) {
@@ -65,21 +70,31 @@ public final class UpgradeWorkbenchScreenHandler extends ScreenHandler {
 			}
 		});
 
-		addSlot(new Slot(this.inventory, CORE_SLOT, CORE_SLOT_X, CORE_SLOT_Y) {
+		coreSlot = addSlot(new Slot(this.inventory, CORE_SLOT, CORE_SLOT_X, CORE_SLOT_Y) {
 			@Override
 			public boolean canInsert(ItemStack stack) {
 				return stack.isOf(ModItems.CORE_PLACEHOLDER);
 			}
+
+			@Override
+			public boolean isEnabled() {
+				return hasToolInput() && visibleMaterialSlots >= 1;
+			}
 		});
 
-		addSlot(new Slot(this.inventory, UPGRADE_SLOT, UPGRADE_SLOT_X, UPGRADE_SLOT_Y) {
+		upgradeSlot = addSlot(new Slot(this.inventory, UPGRADE_SLOT, UPGRADE_SLOT_X, UPGRADE_SLOT_Y) {
 			@Override
 			public boolean canInsert(ItemStack stack) {
 				return isUpgradeMaterial(stack);
 			}
+
+			@Override
+			public boolean isEnabled() {
+				return hasToolInput() && visibleMaterialSlots >= 2;
+			}
 		});
 
-		addSlot(new Slot(this.inventory, CONFIRM_SLOT, CONFIRM_SLOT_X, CONFIRM_SLOT_Y) {
+		confirmSlot = addSlot(new Slot(this.inventory, CONFIRM_SLOT, CONFIRM_SLOT_X, CONFIRM_SLOT_Y) {
 			@Override
 			public boolean canInsert(ItemStack stack) {
 				return false;
@@ -87,7 +102,12 @@ public final class UpgradeWorkbenchScreenHandler extends ScreenHandler {
 
 			@Override
 			public boolean canTakeItems(PlayerEntity playerEntity) {
-				return hasStack();
+				return hasStack() && hasToolInput();
+			}
+
+			@Override
+			public boolean isEnabled() {
+				return hasToolInput() && visibleMaterialSlots >= 3;
 			}
 
 			@Override
@@ -201,29 +221,21 @@ public final class UpgradeWorkbenchScreenHandler extends ScreenHandler {
 			ToolState state = modularToolItem.getOrCreateState(candidate);
 			boolean changed = false;
 
-			if (!coreStack.isEmpty() && state.coreId().isEmpty()) {
-				state = new ToolState(
-					state.toolType(),
-					state.headMaterial(),
-					state.handleMaterial(),
-					Optional.of("kaismod:core_placeholder"),
-					state.headUpgradeLevel(),
-					Math.max(1, state.coreUpgradeLevel())
-				);
-				changed = true;
+			if (!coreStack.isEmpty()) {
+				ToolStateOperationResult coreResult = ToolStateOperations.installCore(state, ToolCoreRegistry.CORE_PLACEHOLDER_ID);
+				if (coreResult.isSuccess()) {
+					state = coreResult.state();
+					changed = true;
+				}
 			}
 
 			String upgradedMaterial = toHeadMaterial(upgradeStack);
 			if (upgradedMaterial != null) {
-				state = new ToolState(
-					state.toolType(),
-					upgradedMaterial,
-					state.handleMaterial(),
-					state.coreId(),
-					state.headUpgradeLevel() + 1,
-					state.coreUpgradeLevel()
-				);
-				changed = true;
+				ToolStateOperationResult upgradeResult = ToolStateOperations.upgradeHead(state, upgradedMaterial);
+				if (upgradeResult.isSuccess()) {
+					state = upgradeResult.state();
+					changed = true;
+				}
 			}
 
 			if (changed) {
@@ -238,10 +250,39 @@ public final class UpgradeWorkbenchScreenHandler extends ScreenHandler {
 			if (!ItemStack.areEqual(currentResult, preview)) {
 				inventory.setStack(CONFIRM_SLOT, preview);
 			}
+			updateDynamicSlotVisibility();
 			sendContentUpdates();
 		} finally {
 			updatingResult = false;
 		}
+	}
+
+	private boolean hasToolInput() {
+		return inventory != null && !inventory.getStack(TOOL_SLOT).isEmpty();
+	}
+
+	private void updateDynamicSlotVisibility() {
+		updateMaterialSlotPositions();
+		if (coreSlot != null) {
+			coreSlot.markDirty();
+		}
+		if (upgradeSlot != null) {
+			upgradeSlot.markDirty();
+		}
+		if (confirmSlot != null) {
+			confirmSlot.markDirty();
+		}
+	}
+
+	private void updateMaterialSlotPositions() {
+		visibleMaterialSlots = getVisibleMaterialSlotCount();
+	}
+
+	private int getVisibleMaterialSlotCount() {
+		if (!hasToolInput()) {
+			return 0;
+		}
+		return inventory.getStack(CONFIRM_SLOT).isEmpty() ? 2 : 3;
 	}
 
 	private void consumeInputForResult() {
@@ -262,13 +303,17 @@ public final class UpgradeWorkbenchScreenHandler extends ScreenHandler {
 	}
 
 	private static boolean isUpgradeMaterial(ItemStack stack) {
-		return stack.isOf(Items.IRON_INGOT)
+		return stack.isOf(Items.COPPER_INGOT)
+			|| stack.isOf(Items.IRON_INGOT)
 			|| stack.isOf(Items.GOLD_INGOT)
 			|| stack.isOf(Items.DIAMOND)
 			|| stack.isOf(Items.NETHERITE_INGOT);
 	}
 
 	private static String toHeadMaterial(ItemStack stack) {
+		if (stack.isOf(Items.COPPER_INGOT)) {
+			return "copper";
+		}
 		if (stack.isOf(Items.IRON_INGOT)) {
 			return "iron";
 		}

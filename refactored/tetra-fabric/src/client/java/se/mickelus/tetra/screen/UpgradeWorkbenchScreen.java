@@ -5,6 +5,7 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.screen.slot.Slot;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
@@ -17,8 +18,6 @@ public final class UpgradeWorkbenchScreen extends HandledScreen<UpgradeWorkbench
 	private static final int TEXTURE_SIZE = 256;
 	private static final int WORKBENCH_X = 136;
 	private static final int WORKBENCH_Y = 42;
-	private static final int WORKBENCH_U = 0;
-	private static final int WORKBENCH_V = 0;
 	private static final int WORKBENCH_WIDTH = 48;
 	private static final int WORKBENCH_HEIGHT = 48;
 	private static final int PLAYER_INVENTORY_X = 72;
@@ -43,8 +42,8 @@ public final class UpgradeWorkbenchScreen extends HandledScreen<UpgradeWorkbench
 			WORKBENCH_TEXTURE,
 			x + WORKBENCH_X,
 			y + WORKBENCH_Y,
-			WORKBENCH_U,
-			WORKBENCH_V,
+			0.0F,
+			0.0F,
 			WORKBENCH_WIDTH,
 			WORKBENCH_HEIGHT,
 			TEXTURE_SIZE,
@@ -62,6 +61,27 @@ public final class UpgradeWorkbenchScreen extends HandledScreen<UpgradeWorkbench
 			TEXTURE_SIZE,
 			TEXTURE_SIZE
 		);
+
+		// Draw explicit slot backplates for material/result slots to avoid "floating" items
+		// while the full original Mutil workbench widgets are not ported yet.
+		drawSlotBackplate(context, x, y, handler.slots.get(1));
+		drawSlotBackplate(context, x, y, handler.slots.get(2));
+		drawSlotBackplate(context, x, y, handler.slots.get(3));
+	}
+
+	private static void drawSlotBackplate(DrawContext context, int screenX, int screenY, Slot slot) {
+		if (slot == null || !slot.isEnabled()) {
+			return;
+		}
+
+		int left = screenX + slot.x - 1;
+		int top = screenY + slot.y - 1;
+		int right = left + 18;
+		int bottom = top + 18;
+
+		context.fill(left, top, right, bottom, 0xFF8B8B8B);
+		context.fill(left + 1, top + 1, right - 1, bottom - 1, 0xFF3F3F3F);
+		context.fill(left + 2, top + 2, right - 2, bottom - 2, 0xFF151515);
 	}
 
 	@Override

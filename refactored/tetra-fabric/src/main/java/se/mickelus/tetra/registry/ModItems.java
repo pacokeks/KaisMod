@@ -16,6 +16,7 @@ import net.minecraft.util.Identifier;
 import java.util.function.Function;
 
 public final class ModItems {
+	public static final Item HAMMER = register("hammer", Item::new);
 	public static final Item CORE_PLACEHOLDER = register("core_placeholder", Item::new);
 	public static final Item MODULAR_SWORD = register("modular_sword", ModularSwordItem::new);
 	public static final Item MODULAR_AXE = register("modular_axe", ModularAxeItem::new);

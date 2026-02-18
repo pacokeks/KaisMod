@@ -2597,5 +2597,6 @@
   "itemGroup.tetra.main": "Tetra Refactored",
   "item.tetra.modular_mace": "Modular Mace",
   "screen.tetra.upgrade_workbench": "Upgrade Workbench",
-  "item.tetra.core_placeholder": "Core Placeholder"
+  "item.tetra.core_placeholder": "Core Placeholder",
+  "item.tetra.hammer": "Hammer"
 }

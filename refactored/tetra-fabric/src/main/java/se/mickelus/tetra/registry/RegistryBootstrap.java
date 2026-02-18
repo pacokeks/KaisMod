@@ -1,6 +1,7 @@
 package se.mickelus.tetra.registry;
 
 import se.mickelus.tetra.core.ToolCoreRegistry;
+import se.mickelus.tetra.block.WorkbenchInteractions;
 import se.mickelus.tetra.network.ModNetworking;
 import se.mickelus.tetra.screen.ModScreenHandlers;
 
@@ -20,6 +21,7 @@ public final class RegistryBootstrap {
 		ModScreenHandlers.initialize();
 		ToolCoreRegistry.initialize();
 		ModNetworking.initialize();
+		WorkbenchInteractions.initialize();
 		initialized = true;
 	}
 }

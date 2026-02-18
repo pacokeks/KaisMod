@@ -1,5 +1,6 @@
 package de.kai.kaismod.registry;
 
+import de.kai.kaismod.core.ToolCoreRegistry;
 import de.kai.kaismod.network.ModNetworking;
 import de.kai.kaismod.screen.ModScreenHandlers;
 
@@ -17,6 +18,7 @@ public final class RegistryBootstrap {
 		ModItems.initialize();
 		ModBlocks.initialize();
 		ModScreenHandlers.initialize();
+		ToolCoreRegistry.initialize();
 		ModNetworking.initialize();
 		initialized = true;
 	}

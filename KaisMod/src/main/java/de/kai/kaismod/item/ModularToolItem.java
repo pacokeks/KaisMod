@@ -1,6 +1,7 @@
 package de.kai.kaismod.item;
 
 import de.kai.kaismod.data.ToolState;
+import de.kai.kaismod.data.ToolStateOperations;
 import de.kai.kaismod.data.ToolType;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.NbtComponent;
@@ -46,7 +47,9 @@ public abstract class ModularToolItem extends Item {
 			return Optional.empty();
 		}
 
-		return parsedState.filter(state -> state.toolType() == toolType);
+		return parsedState
+			.filter(state -> state.toolType() == toolType)
+			.filter(state -> ToolStateOperations.validate(state).isSuccess());
 	}
 
 	public ToolState getOrCreateState(ItemStack stack) {

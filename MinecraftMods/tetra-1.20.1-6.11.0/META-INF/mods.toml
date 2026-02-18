@@ -1,6 +1,6 @@
 modLoader="javafml"
 loaderVersion="[47,)"
-license="ARR"
+license="GPL v2"
 [[mods]]
 modId="tetra"
 version="6.11.0"

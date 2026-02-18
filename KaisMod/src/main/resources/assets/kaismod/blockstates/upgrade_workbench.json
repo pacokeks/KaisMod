@@ -1,7 +1,11 @@
 {
   "variants": {
-    "": {
+    "axis=x": {
       "model": "kaismod:block/upgrade_workbench"
+    },
+    "axis=z": {
+      "model": "kaismod:block/upgrade_workbench",
+      "y": 90
     }
   }
 }

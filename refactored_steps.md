@@ -34,6 +34,9 @@ Erwartung:
 ## 3) Schnelltest mit Commands (empfohlen)
 In eine Testwelt (Creative) gehen und folgende Items geben:
 ```mcfunction
+/give @s tetra:hammer
+/give @s tetra:basic_workbench
+/give @s tetra:forged_workbench
 /give @s tetra:upgrade_workbench
 /give @s tetra:modular_sword
 /give @s tetra:modular_axe
@@ -52,8 +55,15 @@ Erwartung:
 - Alle `tetra:*` Items existieren (kein "Unknown item" Fehler)
 
 ## 4) Block + GUI-Test
-1. `tetra:upgrade_workbench` platzieren.
-2. Rechtsklick auf den Block.
+1. Eine normale Crafting Table platzieren (`minecraft:crafting_table`).
+2. `tetra:hammer` in die Main-Hand nehmen und Rechtsklick auf die Crafting Table.
+
+Erwartung:
+- Die Crafting Table wird zu `tetra:basic_workbench`.
+- Kein Crash/kein Fehler-Spam.
+
+3. `tetra:basic_workbench` oder `tetra:forged_workbench` platzieren (optional auch `tetra:upgrade_workbench` als Legacy-ID).
+4. Rechtsklick auf den Block.
 
 Erwartung:
 - GUI oeffnet ohne Crash.
