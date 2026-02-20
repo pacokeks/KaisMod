@@ -146,6 +146,14 @@ public abstract class ModularToolItem extends Item {
 			}
 		}
 
+		if (attacker instanceof PlayerEntity player) {
+			double attackSpeed = ToolStatCalculator.attackSpeed(toolType, state);
+			int cooldownTicks = Math.max(0, (int) Math.round(20.0 / Math.max(0.1, attackSpeed)) - 5);
+			if (cooldownTicks > 0) {
+				player.getItemCooldownManager().set(stack, cooldownTicks);
+			}
+		}
+
 		stack.damage(ToolStatCalculator.durabilityLossOnHit(toolType), attacker, EquipmentSlot.MAINHAND);
 	}
 

@@ -16,6 +16,7 @@ import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.registry.Registries;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
@@ -389,6 +390,8 @@ public final class UpgradeWorkbenchScreenHandler extends ScreenHandler {
 		if (item == Items.NETHERITE_AXE) return ToolState.base(ToolType.AXE, "netherite", "wood");
 
 		if (item == Items.TRIDENT) return ToolState.base(ToolType.SPEAR, "diamond", "wood");
+		String itemPath = Registries.ITEM.getId(item).getPath();
+		if ("spear".equals(itemPath)) return ToolState.base(ToolType.SPEAR, "diamond", "wood");
 
 		return null;
 	}

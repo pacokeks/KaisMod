@@ -79,7 +79,7 @@ public final class ToolStateOperations {
 			return ToolStateOperationResult.failure(state, ToolStateError.UNKNOWN_HEAD_MATERIAL);
 		}
 
-		if (!currentTier.get().canUpgradeTo(targetTier.get())) {
+		if (currentTier.get() == targetTier.get()) {
 			return ToolStateOperationResult.failure(state, ToolStateError.INVALID_HEAD_UPGRADE_PATH);
 		}
 
